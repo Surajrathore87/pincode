@@ -10,7 +10,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 // Routes
-app.use("/search", searchRoutes);
+app.use("/", searchRoutes);
 app.use("/favourites", favouriteRoutes);
 
 app.listen(3000, () => {

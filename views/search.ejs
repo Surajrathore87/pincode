@@ -67,7 +67,7 @@
           <% results.forEach(result => { %>
           <tr>
             <td><%= result.pincode %></td>
-            <!-- Display the pincode here -->
+            <!-- Display the pincode -->
             <td><%= result.name %></td>
             <td><%= result.branch_type %></td>
             <td><%= result.delivery_status %></td>
@@ -86,7 +86,7 @@
                   name="pincode"
                   value="<%= result.pincode %>"
                 />
-                <!-- Add pincode field here -->
+                <!-- Add pincode -->
                 <input type="hidden" name="name" value="<%= result.name %>" />
                 <input
                   type="hidden"

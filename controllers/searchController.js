@@ -13,14 +13,14 @@ exports.search = async (req, res) => {
   try {
     let results;
     if (!searchType && !query) {
-      // If no search query is provided, fetch all data
+      // If no search query is provided, fetch all data (first page load)
       results = await PostOffice.getAll();
     } else {
       // Otherwise, search by code (pincode) or name
       results = await PostOffice.searchByCodeOrName(searchType, query);
     }
 
-    // Fetch all favourites
+    // Fetch all favourites to check which post offices are already favourited
     const favourites = await Favourite.getAll();
     const favouriteIds = favourites.map((fav) => fav.id);
 
