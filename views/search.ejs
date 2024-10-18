@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Search Pincode Locations</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Search Pincode Locations</h1>
+
+      <!-- Go to Favourites Page button -->
+      <a href="/favourites" class="btn btn-secondary mb-3"
+        >Go to Favourites Page</a
+      >
+
+      <!-- Search Form -->
+      <form action="/search/results" method="POST">
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="searchType"
+            value="code"
+            checked
+          />
+          <label class="form-check-label">Search by Pincode</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="searchType"
+            value="name"
+          />
+          <label class="form-check-label">Search by Name</label>
+        </div>
+        <input
+          type="text"
+          name="query"
+          class="form-control"
+          placeholder="Enter pincode or name"
+        />
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+      </form>
+
+      <!-- Table to display results -->
+      <table class="table mt-4">
+        <thead>
+          <tr>
+            <th>Pincode</th>
+            <th>Name</th>
+            <th>Branch Type</th>
+            <th>Delivery Status</th>
+            <th>Circle</th>
+            <th>District</th>
+            <th>Division</th>
+            <th>Region</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Favourite</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% results.forEach(result => { %>
+          <tr>
+            <td><%= result.pincode %></td>
+            <!-- Display the pincode here -->
+            <td><%= result.name %></td>
+            <td><%= result.branch_type %></td>
+            <td><%= result.delivery_status %></td>
+            <td><%= result.circle %></td>
+            <td><%= result.district %></td>
+            <td><%= result.division %></td>
+            <td><%= result.region %></td>
+            <td><%= result.state %></td>
+            <td><%= result.country %></td>
+            <td>
+              <% if (!favouriteIds.includes(result.id)) { %>
+              <!-- Show favourite button only if not already added -->
+              <form action="/favourites/add" method="POST">
+                <input
+                  type="hidden"
+                  name="pincode"
+                  value="<%= result.pincode %>"
+                />
+                <!-- Add pincode field here -->
+                <input type="hidden" name="name" value="<%= result.name %>" />
+                <input
+                  type="hidden"
+                  name="description"
+                  value="<%= result.description %>"
+                />
+                <input
+                  type="hidden"
+                  name="branch_type"
+                  value="<%= result.branch_type %>"
+                />
+                <input
+                  type="hidden"
+                  name="delivery_status"
+                  value="<%= result.delivery_status %>"
+                />
+                <input
+                  type="hidden"
+                  name="circle"
+                  value="<%= result.circle %>"
+                />
+                <input
+                  type="hidden"
+                  name="district"
+                  value="<%= result.district %>"
+                />
+                <input
+                  type="hidden"
+                  name="division"
+                  value="<%= result.division %>"
+                />
+                <input
+                  type="hidden"
+                  name="region"
+                  value="<%= result.region %>"
+                />
+                <input type="hidden" name="state" value="<%= result.state %>" />
+                <input
+                  type="hidden"
+                  name="country"
+                  value="<%= result.country %>"
+                />
+                <button type="submit" class="btn btn-success">Favourite</button>
+              </form>
+              <% } else { %>
+              <span class="text-success">Already in Favourites</span>
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
