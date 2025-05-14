@@ -10,8 +10,11 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 // Routes
-app.use("/", searchRoutes);
-app.use("/favourites", favouriteRoutes);
+// app.use("/", searchRoutes);
+app.get("/", (req, res) => {
+  res.render("favourites");
+});
+// app.use("/favourites", favouriteRoutes);
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
